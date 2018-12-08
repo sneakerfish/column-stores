@@ -13,11 +13,13 @@ services:
       - POSTGRES_PASSWORD=inq6mth
   web:
     build: .
-    command: python3 manage.py runserver 0.0.0.0:8000
+    command: python3 app.py
     env_file: env
     volumes:
       - .:/code
     ports:
-      - "8000:8000"
+      - "5000:5000"
     depends_on:
       - db
+  redis:
+    image: redis
