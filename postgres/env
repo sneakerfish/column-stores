@@ -1,4 +1,4 @@
-DB_NAME=postgres
+DB_NAME=columntest
 DB_USER=postgres
 DB_PASS=inq6mth
 DB_SERVICE=db

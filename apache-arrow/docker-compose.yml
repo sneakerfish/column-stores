@@ -3,5 +3,6 @@ services:
   app:
     build:
       context: .
+    command: python app.py
     volumes:
-      - .:/app
+      - .:/code

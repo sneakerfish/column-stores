@@ -1,1 +1,5 @@
-
+numpy
+pandas
+pyarrow
+redis
+Flask-SQLAlchemy
