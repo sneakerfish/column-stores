@@ -1,4 +1,4 @@
-import time, os
+import time, os, pdb
 import numpy as np
 from sqlalchemy import create_engine, Table, MetaData, text
 from sqlalchemy.sql import select, column
@@ -6,7 +6,7 @@ from sqlalchemy.sql import select, column
 def select_random(engine, table, nsel=5):
     columns = [col.name for col in table.columns][1:]  # Skip id column
     selected_cols = np.random.choice(columns, nsel, False)
-    sql = text("select {} from column_test".format(", ".join(selected_cols)))
+    sql = text("select {} from {}".format(", ".join(selected_cols), table.name))
     results = engine.execute(sql)
     data = []
     for row in results:

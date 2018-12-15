@@ -4,10 +4,13 @@ from numpy.random import random_sample
 
 
 def load_table(engine, table, nrows, ncols):
-    for i in range(nrows):
-        randomdata = random_sample(ncols)
-        data = { 'col{:03d}'.format(i): randomdata[i] for i in range(ncols) }
-        engine.execute(table.insert(), data)
+    for i in range(nrows // 1000):
+        data_rows = []
+        for i in range(1000):
+            randomdata = random_sample(ncols)
+            data = { 'col{:03d}'.format(i): randomdata[i] for i in range(ncols) }
+            data_rows.append(data)
+        engine.execute(table.insert(), data_rows)
 
 if __name__ == "__main__":
     engine = create_engine('postgresql://{}:{}@{}:{}/{}'.format(

@@ -1,3 +1,4 @@
+import pdb
 import csv
 import os
 from sqlalchemy import create_engine, Table, MetaData
@@ -20,7 +21,7 @@ if __name__ == "__main__":
         writer = csv.writer(csv_file, delimiter=',')
         writer.writerow(['n columns', 'n rows', 'n rows sampled', 'sample', 'time'])
         for colno in [100, 500, 1000]:
-            for rowno in [1000, 10000, 100000, 500000]:
+            for rowno in [1000, 10000, 100000]:
                 try:
                     drop_table(engine, metadata, 'column_test')
                 except sqlalchemy.exc.NoSuchTableError:
