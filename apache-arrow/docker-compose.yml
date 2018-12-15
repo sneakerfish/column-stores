@@ -4,5 +4,7 @@ services:
     build:
       context: .
     command: python app.py
+    ports:
+      - "8888:8888"
     volumes:
       - .:/code

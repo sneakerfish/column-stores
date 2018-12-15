@@ -21,7 +21,7 @@ if __name__ == "__main__":
         writer = csv.writer(csv_file, delimiter=',')
         writer.writerow(['n columns', 'n rows', 'n rows sampled', 'sample', 'time'])
         for colno in [100, 500, 1000]:
-            for rowno in [1000, 10000, 100000]:
+            for rowno in [1000, 10000, 100000, 250000, 500000, 750000]:
                 try:
                     drop_table(engine, metadata, 'column_test')
                 except sqlalchemy.exc.NoSuchTableError:
@@ -32,5 +32,5 @@ if __name__ == "__main__":
                 table = Table('column_test', metadata, autoload=True, autoload_with=engine)
                 load_table(engine, table, rowno, colno)
                 for nsamp in [5, 10, 50]:
-                    for sample in range(50):
+                    for sample in range(100):
                         writer.writerow([colno, rowno, nsamp, sample, time_select(engine, table, nsamp)])

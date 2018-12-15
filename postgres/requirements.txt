@@ -1,4 +1,5 @@
 Flask-SQLAlchemy
 numpy
 redis
+jupyter
 psycopg2-binary
