@@ -29,7 +29,7 @@ if __name__ == "__main__":
                 metadata = MetaData()
                 print("Creating table for {} columns, {} rows.".format(colno, rowno))
                 create_table(engine, metadata, colno)
-                table = Table('column_test', metadata, autoload=True, autoload_with=engine)
+                table = Table('column_test', metadata, autoload_with=engine)
                 load_table(engine, table, rowno, colno)
                 for nsamp in [5, 10, 50]:
                     for sample in range(100):

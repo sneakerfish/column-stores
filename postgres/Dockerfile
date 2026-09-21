@@ -1,9 +1,9 @@
-FROM python:3
+FROM python:3.12-slim
 ENV PYTHONUNBUFFERED 1
 RUN mkdir /code
 WORKDIR /code
 ADD requirements.txt /code/
 ADD dev-requirements.txt /code/
-RUN pip install -r requirements.txt
-RUN pip install -r dev-requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r dev-requirements.txt
 ADD . /code/

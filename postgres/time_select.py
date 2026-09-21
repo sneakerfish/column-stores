@@ -7,10 +7,11 @@ def select_random(engine, table, nsel=5):
     columns = [col.name for col in table.columns][1:]  # Skip id column
     selected_cols = np.random.choice(columns, nsel, False)
     sql = text("select {} from {}".format(", ".join(selected_cols), table.name))
-    results = engine.execute(sql)
-    data = []
-    for row in results:
-        data.append(row)
+    with engine.connect() as conn:
+        results = conn.execute(sql)
+        data = []
+        for row in results:
+            data.append(row)
     return data
 
 def time_select(engine, table, ncols):
@@ -27,5 +28,5 @@ if __name__ == "__main__":
         os.environ['DB_PORT'],
         os.environ['DB_NAME']))
     metadata = MetaData()
-    column_test_table = Table('column_test', metadata, autoload=True, autoload_with=engine)
+    column_test_table = Table('column_test', metadata, autoload_with=engine)
     print(time_select(engine, column_test_table, 30))
