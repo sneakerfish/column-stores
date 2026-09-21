@@ -3,7 +3,7 @@ from sqlalchemy import *
 from optparse import OptionParser
 
 def drop_table(engine, metadata, tablename):
-    table = Table(tablename, metadata, autoload=True, autoload_with=engine)
+    table = Table(tablename, metadata, autoload_with=engine)
     table.drop(engine)
 
 if __name__ == "__main__":

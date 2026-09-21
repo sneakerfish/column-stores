@@ -7,10 +7,12 @@ def load_table(engine, table, nrows, ncols):
     for i in range(nrows // 1000):
         data_rows = []
         for i in range(1000):
-            randomdata = random_sample(ncols)
+            # tolist() gives plain Python floats, which the database driver understands
+            randomdata = random_sample(ncols).tolist()
             data = { 'col{:03d}'.format(i): randomdata[i] for i in range(ncols) }
             data_rows.append(data)
-        engine.execute(table.insert(), data_rows)
+        with engine.begin() as conn:
+            conn.execute(table.insert(), data_rows)
 
 if __name__ == "__main__":
     engine = create_engine('postgresql://{}:{}@{}:{}/{}'.format(
@@ -20,5 +22,5 @@ if __name__ == "__main__":
         os.environ['DB_PORT'],
         os.environ['DB_NAME']))
     metadata = MetaData()
-    table = Table('column_test', metadata, autoload=True, autoload_with=engine)
+    table = Table('column_test', metadata, autoload_with=engine)
     load_table(engine, table, 100000, 100)

@@ -1,8 +1,6 @@
-version: '3'
-
 services:
   db:
-    image: postgres:9.6.11
+    image: postgres:17
     restart: unless-stopped
     env_file: env
     ports:
@@ -11,6 +9,7 @@ services:
       - ./tmp/db:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=inq6mth
+      - POSTGRES_DB=columntest
   web:
     build: .
     command: python3 app.py
@@ -22,4 +21,4 @@ services:
     depends_on:
       - db
   redis:
-    image: redis
+    image: redis:7

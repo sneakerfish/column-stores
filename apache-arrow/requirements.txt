@@ -1,6 +1,6 @@
-numpy
-pandas
-pyarrow
-redis
+numpy>=2.0
+pandas>=2.2
+pyarrow>=18.0
+redis>=5.0
 jupyter
-Flask-SQLAlchemy
+Flask-SQLAlchemy>=3.1
